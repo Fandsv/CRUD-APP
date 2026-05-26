@@ -12,6 +12,11 @@ COPY . .
 
 RUN composer install --no-dev --optimize-autoloader
 
+ARG VITE_PUSHER_APP_KEY
+ARG VITE_PUSHER_APP_CLUSTER
+ENV VITE_PUSHER_APP_KEY=$VITE_PUSHER_APP_KEY
+ENV VITE_PUSHER_APP_CLUSTER=$VITE_PUSHER_APP_CLUSTER
+
 RUN npm install && npm run build
 
 RUN cp .env.example .env && php artisan key:generate
