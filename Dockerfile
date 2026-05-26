@@ -19,8 +19,6 @@ ENV VITE_PUSHER_APP_CLUSTER=$VITE_PUSHER_APP_CLUSTER
 
 RUN npm install && npm run build
 
-RUN cp .env.example .env && php artisan key:generate
-
 EXPOSE 8000
 
-CMD php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=${PORT:-8000}
+CMD php artisan config:clear && php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=${PORT:-8000}
